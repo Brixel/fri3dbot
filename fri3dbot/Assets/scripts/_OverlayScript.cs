@@ -12,7 +12,6 @@ public class _OverlayScript : MonoBehaviour
     private GameObject thisCanvas = null;
     private GameObject thisTextField = null;
     private GameObject thisCodeField = null;
-    private string thisScene = null;
     public int currentSecurityCode = 123;
     public int lastSecurityCode = 321;
     public float securityCodeTime = 60f;
@@ -25,17 +24,22 @@ public class _OverlayScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "_startup")
         {
             // don't destroy this object
-            thisScene = SceneManager.GetActiveScene().name;
             DontDestroyOnLoad(this);
             //create hook for scenechange
             SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
             //set overlay text for startup
             overlayText = "Loading fri3dbot";
+            //spawn overlay
+            spawnOverlay();
+            //reset overlay text
+            overlayText = "";
         }
-        //set scene name as overlay text
-        overlayText = SceneManager.GetActiveScene().name.ToString();
-        //spawn overlay
-        spawnOverlay();
+        else
+        {
+            //spawn overlay
+            spawnOverlay();
+        }
+
         //trigger security code
         Invoke("generateSecurityCode", 0.1f);
     }
@@ -46,7 +50,7 @@ public class _OverlayScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Substring(0, 6) != "_trans")
         {
             //set scene name as overlay text
-            overlayText = SceneManager.GetActiveScene().name.ToString();
+            //overlayText = SceneManager.GetActiveScene().name.ToString();
             spawnOverlay();
         }
     }
@@ -77,9 +81,6 @@ public class _OverlayScript : MonoBehaviour
         //security code
         thisCodeField = GameObject.Find("topText").gameObject;
         thisCodeField.GetComponent<Text>().text = currentSecurityCode.ToString();
-
-        //update scene var
-        thisScene = SceneManager.GetActiveScene().name;
 
         //override colors for some faces
         //bend-r (background is gray)

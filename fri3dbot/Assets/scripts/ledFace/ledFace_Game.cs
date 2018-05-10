@@ -9,7 +9,15 @@ public class ledFace_Game : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Invoke("changeScene", 1f);
+        if (SceneManager.GetActiveScene().name.Substring(0, 12) == "ledFace_Game")
+        {
+            Invoke("changeScene", 0.5f);
+        }
+        else
+        {
+            Debug.Log("destroyed script ledFace_Game");
+            Destroy(this.gameObject);
+        }
     }
 	
 	// Update is called once per frame
@@ -22,7 +30,6 @@ public class ledFace_Game : MonoBehaviour {
         switch (SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 2, 2))
         {
             case "00":
-                GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerBusy();
                 SceneManager.LoadScene("ledFace_Game01");
                 break;
             case "01":
@@ -52,7 +59,6 @@ public class ledFace_Game : MonoBehaviour {
             case "09":
                 // animation only runs once
                 GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().determineMood();
-                GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerReady();
                 break;
             default:
                 SceneManager.LoadScene("ledFace_Error00");

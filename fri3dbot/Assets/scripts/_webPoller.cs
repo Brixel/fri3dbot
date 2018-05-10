@@ -21,7 +21,7 @@ public class _webPoller : MonoBehaviour
 
         }
 
-	    StartCoroutine(nameof(PollHndler));
+	    StartCoroutine("PollHndler");
 	}
 	
 	// Update is called once per frame
@@ -50,6 +50,6 @@ public class _webPoller : MonoBehaviour
         }
 
         yield return new WaitForSeconds(Timeout);
-        StartCoroutine(nameof(PollHndler));
+        StartCoroutine("PollHndler");
     }
 }

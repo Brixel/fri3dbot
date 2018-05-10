@@ -65,6 +65,10 @@ public class gearheadScript : MonoBehaviour {
     void determineMood()
     {      
         newMoodID = UnityEngine.Random.Range(0, 5); // choose next mood between x (inclusive) and x (exclusive)
+        if(newMoodID == moodID)
+        {
+            determineMood();
+        }
         changeMood();
     }
 
@@ -73,12 +77,11 @@ public class gearheadScript : MonoBehaviour {
         if (newMoodID != moodID)
         {
             // scene is not ready for change yet... (animation not done yet)
-            if (moodID == 0)
+            if (moodID == 0) // unless mood is 0, then you may change regardless
             {
                 moodID = newMoodID;
                 changeMood();
             }
-
         }
         else
         {
@@ -126,9 +129,9 @@ public class gearheadScript : MonoBehaviour {
     {
         //only change if needed
         if (moodID != newMoodID)
-        {
+        {          
             moodID = newMoodID;
-            changeMood();
+            changeMood();           
         }
     }
 }

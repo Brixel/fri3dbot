@@ -8,7 +8,15 @@ public class ledFace_Confused : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Invoke("changeScene", 0.3f);
+        if (SceneManager.GetActiveScene().name.Substring(0, 16) == "ledFace_Confused")
+        {
+            Invoke("changeScene", 0.3f);
+        }
+        else
+        {
+            Debug.Log("destroyed script ledface_Confused");
+            Destroy(this.gameObject);
+        }
     }
 	
 	// Update is called once per frame
@@ -21,7 +29,6 @@ public class ledFace_Confused : MonoBehaviour {
         switch (SceneManager.GetActiveScene().name.Substring(SceneManager.GetActiveScene().name.Length - 2, 2))
         {
             case "00":
-                GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerBusy();
                 SceneManager.LoadScene("ledFace_Confused01");
                 break;
             case "01":
@@ -46,7 +53,6 @@ public class ledFace_Confused : MonoBehaviour {
                 SceneManager.LoadScene("ledFace_Confused08");
                 break;
             case "08":
-                GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerReady();
                 SceneManager.LoadScene("ledFace_Confused00");
                 break;
             default:

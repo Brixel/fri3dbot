@@ -67,6 +67,10 @@ public class eeveScript : MonoBehaviour {
     {
 
         newMoodID = UnityEngine.Random.Range(0, 7); // choose next mood between x (inclusive) and x (exclusive)
+        if (newMoodID == moodID)
+        {
+            determineMood();
+        }
         changeMood();
     }
 
@@ -105,6 +109,8 @@ public class eeveScript : MonoBehaviour {
                     break;
                 case 4:
                     //glitch
+                    moodTime = UnityEngine.Random.Range(2, 6);
+                    //beter not to show errors too long, they so sad :(
                     SceneManager.LoadScene("eeve-glitch");
                     break;
                 case 5:
@@ -113,6 +119,8 @@ public class eeveScript : MonoBehaviour {
                     break;
                 case 6:
                     //error
+                    moodTime = UnityEngine.Random.Range(2, 6);
+                    //beter not to show errors too long, they so sad :(
                     SceneManager.LoadScene("eeve-error");
                     break;
 
@@ -121,7 +129,7 @@ public class eeveScript : MonoBehaviour {
                     SceneManager.LoadScene("eeve-idle");
                     break;
             }
-
+            Debug.Log("new mood in: " + moodTime.ToString() + " seconds");
             //apply mood time
             Invoke("determineMood", moodTime);
         }

@@ -7,8 +7,16 @@ public class ledFace_Looking : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        float randomTime = Random.Range(0.5f, 5f);
-        Invoke("changeScene", randomTime);
+        if (SceneManager.GetActiveScene().name.Substring(0, 15) == "ledFace_Looking")
+        {
+            float randomTime = Random.Range(0.5f, 5f);
+            Invoke("changeScene", randomTime);
+        }
+        else
+        {
+            Debug.Log("destroyed script ledFace_Looking");
+            Destroy(this.gameObject);
+        }
     }
 	
 	// Update is called once per frame
@@ -18,7 +26,6 @@ public class ledFace_Looking : MonoBehaviour {
 
     void changeScene()
     {
-        GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerReady();
         int randomScene = Random.Range(0, 4);
         switch (randomScene)
         {

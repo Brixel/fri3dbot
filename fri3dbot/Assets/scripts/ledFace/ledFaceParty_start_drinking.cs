@@ -17,7 +17,7 @@ public class ledFaceParty_start_drinking : MonoBehaviour {
 
     void goToNextScene()
     {
-        GameObject.Find("scriptHolder").GetComponent<ledFaceScript>().triggerBusy();
         SceneManager.LoadScene("ledFace_Party01");
+
     }
 }
